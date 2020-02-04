@@ -1,0 +1,36 @@
+---
+
+server:
+  port: 9292
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+    info:
+      show-details: always
+    metrics:
+      show-details: always
+
+restClient:
+  authUrl: 'https://bots.sg.singtelgroup.net/api/Account/Authenticate'
+  tenancyName: 'Optus-Nokia'
+  usernameOrEmailAddress: 'indradipta.biswas'
+  password: 'Winter@1'
+  tlsVersion: 'TLSv1'
+
+botIdUrl: 'https://bots.sg.singtelgroup.net/odata/Robots'
+
+#logging:
+#  level:
+#    org.springframework: ERROR
+#    com.au.tupolevbase: INFO
+
+#  pattern:
+#    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+#    file: "%d %p %c{1.} [%t] %m%n"
+#  file: /home/tupapp/tupolev-base/logs/snmp-adaptor/snmp-adaptor.log

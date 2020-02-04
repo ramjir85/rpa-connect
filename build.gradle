@@ -1,0 +1,92 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.5.RELEASE'
+	id 'java'
+	id 'application'
+	id 'idea'
+	id 'maven'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'optus.com.au.padlock'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+mainClassName = 'optus.com.au.padlock.RpaConnectorApplication'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile group: 'org.springframework.boot', name:'spring-boot-starter-web', version:'2.1.5.RELEASE'
+
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.1.5.RELEASE'
+
+
+
+	// https://mvnrepository.com/artifact/org.apache.camel/camel-core
+	compile group: 'org.apache.camel', name: 'camel-core', version: '2.20.0'
+	// https://mvnrepository.com/artifact/org.apache.camel/camel-kafka
+	compile group: 'org.apache.camel', name: 'camel-kafka', version: '2.20.0'
+
+	// https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients
+	//compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.2.1'
+	compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.3.0'
+
+
+	// https://mvnrepository.com/artifact/org.apache.camel/camel-stream
+	compile group: 'org.apache.camel', name: 'camel-stream', version: '2.20.0'
+
+	// https://mvnrepository.com/artifact/org.scala-lang/scala-library
+	compile group: 'org.scala-lang', name: 'scala-library', version: '2.11.0'
+
+	// https://mvnrepository.com/artifact/org.apache.camel/camel-xmljson
+	compile group: 'org.apache.camel', name: 'camel-xmljson', version: '2.20.0'
+
+// https://mvnrepository.com/artifact/com.io7m.xom/xom
+	//compile group: 'com.io7m.xom', name: 'xom', version: '1.2.10'
+        compile group: 'xom', name: 'xom', version: '1.2.5'
+
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client
+	compile group: 'org.glassfish.jersey.core', name: 'jersey-client', version: '2.26'
+
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson
+	compile group: 'org.glassfish.jersey.media', name: 'jersey-media-json-jackson', version: '2.26'
+
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.connectors/jersey-apache-connector
+	//compile group: 'org.glassfish.jersey.connectors', name: 'jersey-apache-connector', version: '2.26'
+
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.inject/project
+	//compile group: 'org.glassfish.jersey.inject', name: 'project', version: '2.26', ext: 'pom'
+
+	// https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2
+	compile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version: '2.26'
+
+
+// https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-common
+	compile group: 'org.glassfish.jersey.core', name: 'jersey-common', version: '2.26'
+
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.7.3'
+
+	compile fileTree(dir: 'libs', include: ['*.jar'])
+
+
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.1.5.RELEASE'
+}
+
+bootJar {
+	launchScript()
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: "file:///tmp/")
+			pom.version = '1.0Maven'
+			pom.artifactId = 'rpm-connector'
+		}
+	}
+
+}
